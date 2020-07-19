@@ -54,7 +54,9 @@ class PriceCalculator extends Component {
           },
           function () {
             this.updatedCalculatedProductPrice(
-              this.state.calculatedProductPrice
+              this.state.calculatedProductPrice,
+              orderQty,
+              productOrderType
             );
           }
         )
@@ -66,9 +68,10 @@ class PriceCalculator extends Component {
       );
   }
 
-  updatedCalculatedProductPrice(calculatedPrice) {
-    console.log("updatedCalculatedProductPrice Called");
-    console.log(calculatedPrice);
+  updatedCalculatedProductPrice(calculatedPrice, orderQty, productOrderType) {
+    this.setState({
+      calculatedProductPrice: `Calculated Price for the ${orderQty} ${productOrderType} is ${calculatedPrice}`,
+    });
   }
 
   componentDidMount() {
