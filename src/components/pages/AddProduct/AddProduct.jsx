@@ -51,9 +51,11 @@ class AddProduct extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-    console.log(
-      `Input values : ${this.state.product_name}, ${this.state.price}, ${this.state.units_per_carton}, ${this.state.compensate}, ${this.state.eligible_quantity_for_discount}, ${this.state.discount}`
-    );
+
+    const convertedCompensate = (parseInt(this.state.compensate) + 100) / 100;
+
+    const convertedDiscount = (100 - parseInt(this.state.discount)) / 100;
+
     const headers = {
       "Content-Type": "application/json",
     };
@@ -61,9 +63,9 @@ class AddProduct extends Component {
       name: this.state.product_name,
       price: this.state.price,
       unitsPerCarton: this.state.units_per_carton,
-      compensate: this.state.compensate,
+      compensate: convertedCompensate,
       discountQty: this.state.eligible_quantity_for_discount,
-      discount: this.state.discount,
+      discount: convertedDiscount,
     };
     console.log(addProductRequestObj);
     axios
