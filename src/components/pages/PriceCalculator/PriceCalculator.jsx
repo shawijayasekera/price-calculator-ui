@@ -35,11 +35,11 @@ class PriceCalculator extends Component {
   onSubmit(e) {
     e.preventDefault();
     const productId = this.state.product_id;
-    const orderQty = this.state.product_id;
+    const orderQty = this.state.quantity;
     const productOrderType = this.state.order_type;
     axios
       .get(
-        `http://localhost:8081/price-calculator-breakdown/products/${productId}/price`,
+        `http://localhost:8081/price-calculator/products/${productId}/price`,
         {
           params: {
             qty: orderQty,
@@ -48,13 +48,15 @@ class PriceCalculator extends Component {
         }
       )
       .then((res) =>
-        this.setState({
-          calculatedProductPrice: res.data.quantityPrice.calculatedPrice},
-          function() {
+        this.setState(
+          {
+            calculatedProductPrice: res.data.quantityPrice.calculatedPrice,
+          },
+          function () {
             this.updatedCalculatedProductPrice(
               this.state.calculatedProductPrice
             );
-          },
+          }
         )
       )
       .catch((error) =>
@@ -147,7 +149,12 @@ class PriceCalculator extends Component {
           <label>
             <b>Calculated Price : </b>
           </label>
-          <textarea readOnly className="form-control" value={this.state.calculatedProductPrice} rows="1" ></textarea>
+          <textarea
+            readOnly
+            className="form-control"
+            value={this.state.calculatedProductPrice}
+            rows="1"
+          ></textarea>
         </div>
       </div>
     );

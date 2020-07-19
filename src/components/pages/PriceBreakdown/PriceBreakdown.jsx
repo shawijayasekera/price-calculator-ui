@@ -37,7 +37,7 @@ class PriceBreakdown extends Component {
   getProductPriceBreakdown(productId) {
     axios
       .get(
-        `http://localhost:8081/price-calculator-breakdown/products/${productId}/price/breakdown`,
+        `http://localhost:8081/price-calculator/products/${productId}/price/breakdown`,
         {
           params: {
             qty: 50,
